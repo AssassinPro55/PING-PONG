@@ -1,12 +1,12 @@
 from pygame import *
 
 # Создание и настройка окна
-W = 700
+W = 900
 H = 500
 
 window = display.set_mode((W, H))
 display.set_caption('Пинг понг')
-background = (204, 117, 55)
+background = (35, 115, 33)
 window.fill(background)
 
 FPS = 60
@@ -52,7 +52,7 @@ class Ping_Ball(GameSprite):
 #Текст
 
 player1 = Player1('Player.png', 0, H//2, 85, 85, 8)
-player2 = Player2('Bot.png', 620, H//2, 85, 85, 8)
+player2 = Player2('Bot.png', 820, H//2, 85, 85, 8)
 ball = Ping_Ball('Ball.png', W//2, H//2, 60, 60, 0)
 
 #Музыка
@@ -60,9 +60,15 @@ ball = Ping_Ball('Ball.png', W//2, H//2, 60, 60, 0)
 mixer.init()
 mixer.music.load('blinding-lights.ogg')
 mixer.music.play()
-mixer.music.set_volume(0.5)
+mixer.music.set_volume(0.2)
 
 kick = mixer.Sound('Ydar.ogg')
+
+#Текст
+font.init()
+font = font.Font(None, 250)
+win_Player_1 = font.render('Player 1 WINS!!!', True, (190, 204, 35))
+win_Player_2 = font.render("Player 2 WINS!!!", True, (190, 204, 35))
 
 #Игровой цикл
 
@@ -77,8 +83,8 @@ while game:
             game = False
 
     if (sprite.collide_rect(player1, ball)) or (sprite.collide_rect(player2, ball)):
-        mixer.music.load('Ydar.ogg')
-        mixer.music.play()
+        kick.set_volume(0.1)
+        kick.play()
 
     if finish != True:
         window.fill(background)
@@ -109,27 +115,4 @@ while game:
 
 
 
-
-
-
-
-
-
-
-# Текст
-#font.init()
-#font = font.Font(None, 70)
-#win = font.render('YOU SIGMA!', True, (255, 215, 0))
-#lose = font.render("YOU LOX!(((", True, (180, 0, 0))
-
-#player = Player('hero.png', 5, H - 80, 4)
-#monster = Ene#y('cyborg.png', W - 80, 280, 6)
-#final = GameSprite('treasure.png', W - 120, H - 80, 0)
-
-
-        #if sprite.collide_rect(player, final):
-            #finish = True
-            #window.blit(win, (200, 200))
-            #money.play()
             
-
